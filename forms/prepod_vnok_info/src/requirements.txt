@@ -1,3 +1,6 @@
 pypdf==6.19.0
 reportlab==5.0.1
 defusedxml==0.7.1
+fonttools==4.60.1
+# Only for src/static/firefox_check.py (integration check in Firefox).
+websocket-client==1.9.2

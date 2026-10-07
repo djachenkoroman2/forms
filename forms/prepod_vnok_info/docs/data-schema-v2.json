@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Данные статичной формы prepod_vnok_info (один студент), схема 2.0 — включая незавершённые черновики",
+  "description": "Схема 2.0 используется формой версии 2.0 начиная с v2.0-draft02. Схема 1.0 (data-schema.json) относится к XFA-версии 1.0 и к черновику v2.0-draft01.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "form_id", "date_filled", "teacher", "students"],
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "form_id": {"const": "prepod_vnok_info"},
+    "date_filled": {
+      "type": "string",
+      "description": "Дата заполнения как введена, ожидаемый формат ДД.ММ.ГГГГ. Существование даты проверяет extract_static.py --check.",
+      "pattern": "^(?:|\\s*\\d{2}\\.\\d{2}\\.\\d{4}\\s*)$",
+      "x-checkedOnExtraction": true
+    },
+    "teacher": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["full_name", "position", "department"],
+      "properties": {
+        "full_name": {"type": "string"},
+        "position": {"type": "string"},
+        "department": {"type": "string", "description": "Кафедра, на которой работает преподаватель."}
+      }
+    },
+    "students": {"type": "array", "minItems": 1, "maxItems": 1, "items": {"$ref": "#/$defs/student"}}
+  },
+  "$defs": {
+    "student": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "last_name", "first_name", "middle_name", "course", "group_code", "phone", "email",
+                   "task", "schedule", "expected_results", "status", "achievements", "notes"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1, "description": "ID анкеты из поля student.id (prepare_copy.py)."},
+        "last_name": {"type": "string", "x-requiredForCompletion": true},
+        "first_name": {"type": "string", "x-requiredForCompletion": true},
+        "middle_name": {"type": "string", "description": "Может отсутствовать."},
+        "course": {"type": "string", "description": "Номер курса как текст; --check предупреждает, если это не целое число 1–6."},
+        "group_code": {"type": "string", "x-requiredForCompletion": true},
+        "phone": {"type": "string", "x-requiredForCompletion": true},
+        "email": {"type": "string", "x-requiredForCompletion": true},
+        "task": {"type": "string", "x-requiredForCompletion": true},
+        "schedule": {"type": "string", "description": "Расписание работы с преподавателем в свободной форме."},
+        "expected_results": {"type": "string"},
+        "status": {"type": "string"},
+        "achievements": {"type": "array", "maxItems": 10, "items": {"$ref": "#/$defs/achievement"}},
+        "notes": {"type": "string"}
+      }
+    },
+    "achievement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "text"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^achievement-(?:[1-9]|10)$", "description": "Номер строки в форме."},
+        "text": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

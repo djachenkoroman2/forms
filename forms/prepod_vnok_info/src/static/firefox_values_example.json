@@ -1,0 +1,10 @@
+{"__typed__": [["student.last_name", "Ёлкина"], ["meta.date_filled", "07102026"]],
+ "teacher.full_name": "Вымышленный Алексей Петрович", "teacher.position": "Доцент",
+ "teacher.department": "Кафедра прикладной математики",
+ "student.first_name": "Юлия", "student.middle_name": "Щукина", "student.course": "3",
+ "student.group_code": "001-НИР-А", "student.phone": "+00 (012) 003-04-05", "student.email": "student@example.org",
+ "student.status": "Провожу эксперимент",
+ "student.schedule": "Консультации: Пн и Ср, 14:00–15:30, ауд. 012-А.\nСамостоятельная работа: Пт, 10:00–12:00, лаборатория 2.",
+ "student.task": "Изучить методы обработки экспериментальных данных.\nПодготовить сравнительный отчёт «№ 1» — с выводами.",
+ "student.expected_results": "Отчёт и доклад на семинаре.", "student.notes": "Примечание: ёЁ ъЪ",
+ "achievements.1.text": "Подготовлен обзор литературы.", "achievements.2.text": "Представлен доклад."}
