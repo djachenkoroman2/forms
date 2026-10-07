@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "form_id": "prepod_vnok_info",
+  "teacher": {"full_name": "Вымышленный Алексей Петрович", "position": "Доцент"},
+  "students": [{
+    "id": "student-example-1",
+    "full_name": "Примеров Иван Сергеевич",
+    "group_code": "001-НИР-А",
+    "phone": "+00 (012) 003-04-05",
+    "email": "student@example.org",
+    "task": "Изучить методы обработки экспериментальных данных.\nПодготовить сравнительный отчёт.",
+    "schedule": [
+      {"id": "entry-example-1", "mode": "Консультация", "weekdays": ["monday", "wednesday"], "time_from": "14:00", "time_to": "15:30", "room": "012-А"},
+      {"id": "entry-example-2", "mode": "Самостоятельная работа по согласованию", "weekdays": ["friday"], "time_from": "10:00", "time_to": "12:00", "room": "Лаборатория 2"}
+    ],
+    "expected_results": "Отчёт и доклад на учебном семинаре.",
+    "status": "Провожу эксперимент",
+    "achievements": [
+      {"id": "achievement-example-1", "text": "Подготовлен обзор литературы."},
+      {"id": "achievement-example-2", "text": "Представлен промежуточный доклад."}
+    ],
+    "notes": ""
+  }]
+}

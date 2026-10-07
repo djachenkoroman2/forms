@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Данные формы prepod_vnok_info — включая незавершённые черновики",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "form_id", "teacher", "students"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "form_id": {"const": "prepod_vnok_info"},
+    "teacher": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["full_name", "position"],
+      "properties": {
+        "full_name": {"type": "string"},
+        "position": {"type": "string"}
+      }
+    },
+    "students": {"type": "array", "items": {"$ref": "#/$defs/student"}}
+  },
+  "$defs": {
+    "id": {"type": "string", "minLength": 1, "description": "Устойчивый идентификатор; не зависит от позиции записи в списке."},
+    "student": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "full_name", "group_code", "phone", "email", "task", "schedule", "expected_results", "status", "achievements", "notes"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "full_name": {"type": "string", "x-requiredForCompletion": true},
+        "group_code": {"type": "string", "x-requiredForCompletion": true},
+        "phone": {"type": "string", "x-requiredForCompletion": true},
+        "email": {"type": "string", "x-requiredForCompletion": true},
+        "task": {"type": "string", "x-requiredForCompletion": true},
+        "schedule": {"type": "array", "items": {"$ref": "#/$defs/schedule"}},
+        "expected_results": {"type": "string"},
+        "status": {"type": "string"},
+        "achievements": {"type": "array", "items": {"$ref": "#/$defs/achievement"}},
+        "notes": {"type": "string"}
+      }
+    },
+    "schedule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "mode", "weekdays", "time_from", "time_to", "room"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "mode": {"type": "string"},
+        "weekdays": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"enum": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]}
+        },
+        "time_from": {"type": "string", "pattern": "^(?:|(?:[01][0-9]|2[0-3]):[0-5][0-9])$"},
+        "time_to": {"type": "string", "pattern": "^(?:|(?:[01][0-9]|2[0-3]):[0-5][0-9])$"},
+        "room": {"type": "string"}
+      }
+    },
+    "achievement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "text"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "text": {"type": "string"}
+      }
+    }
+  }
+}
