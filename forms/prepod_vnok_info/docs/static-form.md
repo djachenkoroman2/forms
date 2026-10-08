@@ -138,6 +138,8 @@ Firefox (PDF.js) во время редактирования показывае
 
 [extract_static.py](../src/static/extract_static.py) читает значения полей AcroForm через pypdf, без OCR, и формирует JSON по [схеме 2.0](data-schema-v2.json). Пример: [example-data-v2.json](example-data-v2.json).
 
+Для тестирования программ обработки есть [набор из 20 заполненных форм](../examples/README.md) на вымышленных данных одной кафедры. В наборе только PDF; ожидаемые данные, код выхода и сообщения `--check` описаны в README набора: 14 форм без ошибок (из них 2 с предупреждением о курсе), 5 форм с ошибками проверки и 1 форма без ID анкеты (ошибка извлечения). **Расхождение:** при дате вида `7.10.2026` извлечённый JSON не соответствует шаблону `date_filled` в схеме 2.0 ([подробнее](../examples/README.md#расхождение-пример-17-и-схема-20)).
+
 - Корень: `schema_version` (`"2.0"`), `form_id`, `date_filled`, `teacher` {`full_name`, `position`, `department`}, `students` (ровно один элемент).
 - Студент: `id`, `last_name`, `first_name`, `middle_name`, `course`, `group_code`, `phone`, `email`, `task`, `schedule` (строка), `expected_results`, `status`, `achievements[]` {`id`, `text`}, `notes`.
 - Пустые строки портфолио пропускаются. `achievements[].id` = `achievement-N`, где `N` — номер строки в форме. Он не меняется, если очистить другие строки.
